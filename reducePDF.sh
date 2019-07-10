@@ -7,14 +7,14 @@ then
 fi	
 
 rPDF() {
-	pdftops $1 && rm $1 && ps2pdf ${1%.*}.ps && rm ${1%.*}.ps
+	pdftops "$1" && rm "$1" && ps2pdf "${1%.*}.ps" && rm "${1%.*}.ps"
 }
 
 export -f rPDF
 
 if command -v parallel &> /dev/null
 then
-	parallel rPDF ::: $@ 
+	parallel rPDF ::: "$@" 
 else
 	echo "Please install 'parallel' to be able to convert more than one PDF at the same time."
 	for f in $@
